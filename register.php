@@ -25,7 +25,7 @@ if (!$stmt) {
     $stmt->bind_param("sssss", $start_date, $end_date, $task, $task_detail, $status);
     try {
         if ($stmt->execute()) {
-            header('Location: index.php');
+            header('Location: register_complete.php');
             exit;
         } else {
             throw new Exception($stmt->error);
@@ -73,7 +73,7 @@ if (!$stmt) {
                     <option value="完了" <?php echo (isset($status) && $status === "完了") ? 'selected' : ''; ?>>完了</option>
                 </select>
 
-                <button type="submit">登録する</button>
+                <button type="submit" onclick="return confirm('登録してよろしいですか？');">登録する</button>
             </form>
         </div>
     </main>
