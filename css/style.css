@@ -1,0 +1,337 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: cornflowerblue;
+    padding: 1rem 0;
+}
+
+nav {
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.products h1 {
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.products-ui {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 1rem;
+}
+
+.products-ui .btn {
+    padding: 10px 20px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.products-ui .btn:hover {
+    background-color: #218838;
+}
+
+.products-ui form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.products-ui label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.products-ui select,
+.products-ui input {
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.products-ui button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.products-ui button:hover {
+    background-color: #0056b3;
+}
+
+.register_area {
+    margin-right: 10px;
+}
+
+.search_area {
+    margin-right: 10px;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e8e8e8;
+}
+
+.sort_area {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e8e8e8;
+
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    table-layout: auto;
+    border-right: 1px solid #ddd;
+}
+
+.products-table th,
+.products-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    text-align: center;
+    word-break: break-word;
+    white-space: normal;
+    height: auto;
+}
+
+.products-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.products-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.products-table th:nth-child(1),
+.products-table td:nth-child(1) {
+    width: 11%; /* 開始日 */
+}
+
+.products-table th:nth-child(2),
+.products-table td:nth-child(2) {
+    width: 11%; /* 終了日 */
+}
+
+.products-table th:nth-child(3),
+.products-table td:nth-child(3) {
+    width: 20%; /* タスク名 */
+}
+
+.products-table th:nth-child(4),
+.products-table td:nth-child(4) {
+    width: 40%; /* タスク詳細 */
+}
+
+.products-table th:nth-child(5),
+.products-table td:nth-child(5) {
+    width: 8%; /* ステータス */
+}
+
+.products-table th:nth-child(6),
+.products-table td:nth-child(6) {
+    width: 5%; /* 編集 */
+}
+
+.products-table th:nth-child(7),
+.products-table td:nth-child(7) {
+    width: 5%; /* 削除 */
+}
+
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #fafafa;
+    color: #555;
+}
+
+.register {
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.register h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.register a {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.register label {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    display: block;
+}
+
+.register input,
+.register select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register button:hover {
+    background-color: #0056b3;
+}
+
+.complete {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.complete h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #d9534f; /* 赤系の強調カラー */
+}
+
+.complete a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .products-ui {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .products-ui form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .products-ui select,
+    .products-ui input {
+        width: 100%;
+    }
+
+    .products-table th,
+    .products-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .register {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .register input,
+    .register select {
+        font-size: 14px;
+    }
+
+    .register button {
+        font-size: 14px;
+    }
+
+    .complete {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .complete h2 {
+        font-size: 1.5rem;
+    }
+
+    .complete a {
+        font-size: 14px;
+    }
+}
