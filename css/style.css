@@ -139,6 +139,7 @@ main {
     word-break: break-word;
     white-space: normal;
     height: auto;
+    font-size: 16px;
 }
 
 .products-table th {
@@ -146,9 +147,6 @@ main {
     color: white;
 }
 
-.products-table tr:hover {
-    background-color: #f1f1f1;
-}
 
 .products-table th:nth-child(1),
 .products-table td:nth-child(1) {
@@ -185,6 +183,47 @@ main {
     width: 5%; /* 削除 */
 }
 
+.edit {
+    padding: 0 !important;
+}
+
+.edit a {
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+.edit a:visited {
+    color: black;
+}
+
+.edit a:hover {
+    opacity: 0.5;
+}
+
+.delete {
+    padding: 0 !important;
+}
+
+.delete a {
+    text-decoration: none;
+    font-size: 30px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+.delete a:visited {
+    color: black;
+}
+
+.delete a:hover {
+    opacity: 0.5;
+}
 
 footer {
     text-align: center;
@@ -279,6 +318,44 @@ footer {
     border-radius: 5px;
     font-size: 14px;
     transition: 0.3s;
+}
+
+.status-select {
+    width: 120px;
+    height: 36px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.status-select:hover {
+    border-color: #007bff;
+}
+
+.status-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.status-select option[value="未着手"] {
+    background-color: #ffcccc;
+}
+.status-select option[value="進行中"] {
+    background-color: #ffffcc;
+}
+.status-select option[value="完了"] {
+    background-color: #ccffcc;
 }
 
 @media (max-width: 768px) {

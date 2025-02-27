@@ -10,7 +10,7 @@ if (!$id) {
 $sql_delete = "delete from todos where id=?";
 $stmt = $db->prepare($sql_delete);
 if (!$stmt) {
-    dir($db->error);
+    die($db->error);
 }
 
 $stmt->bind_param('i', $id);
@@ -19,5 +19,5 @@ if (!$success) {
     die($db->error);
 }
 
-header('Location: deleted.php');
+header('Location: delete_complete.php');
 ?>

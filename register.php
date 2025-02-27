@@ -23,11 +23,15 @@ if (!$stmt) {
 }
 
     $stmt->bind_param("sssss", $start_date, $end_date, $task, $task_detail, $status);
-    if ($stmt->execute()) {
-        header('Location: index.php');
-        exit;
-    }else {
-        $errors[] = $stmt->error;
+    try {
+        if ($stmt->execute()) {
+            header('Location: index.php');
+            exit;
+        } else {
+            throw new Exception($stmt->error);
+        }
+    } catch (Exception $e) {
+        $errors[] = "エラー: " . $e->getMessage();
     }
 }
 ?>
@@ -57,10 +61,10 @@ if (!$stmt) {
                 <input type="date" name="end_date" id="end_date" value="<?php echo isset($end_date) ? htmlspecialchars($end_date) : ''; ?>" required>
 
                 <label for="task">タスク名</label>
-                <input type="text" name="task" id="task" value="<?php echo isset($task) ? htmlspecialchars($task) : ''; ?>" required>
+                <input type="text" name="task" id="task" value="<?php echo isset($task) ? htmlspecialchars($task) : ''; ?>" maxlength="30" required>
 
                 <label for="task_detail">タスク詳細</label>
-                <input type="text" name="task_detail" id="task_detail" value="<?php echo isset($task_detail) ? htmlspecialchars($task_detail) : ''; ?>" required>
+                <input type="text" name="task_detail" id="task_detail" value="<?php echo isset($task_detail) ? htmlspecialchars($task_detail) : ''; ?>" maxlength="100" required>
 
                 <label for="status">ステータス</label>
                 <select name="status" id="status" required>
@@ -74,6 +78,6 @@ if (!$stmt) {
         </div>
     </main>
     <footer>
-        <p class="copyright">&copy; タスク管理アプリ All rights reserved.</p>
+        <p class="copyright">&copy; 2025 タスク管理アプリ</p>
     </footer>
 </body>

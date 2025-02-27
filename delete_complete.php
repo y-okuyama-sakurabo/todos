@@ -22,6 +22,6 @@ session_start();
     </div>
 </main>
 <footer>
-    <p class="copyright">&copy; タスク管理アプリ All rights reserved.</p>
+    <p class="copyright">&copy; 2025 タスク管理アプリ</p>
 </footer>
 </body>

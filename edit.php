@@ -46,11 +46,15 @@ if (empty($errors)) {
     }
 
     $stmt->bind_param("sssssi", $start_date, $end_date, $task, $task_detail, $status, $id);
-    if ($stmt->execute()) {
-        header('Location: edit_complete.php');
-        exit;
-    } else {
-        $errors[] = $stmt->error;
+    try {
+        if ($stmt->execute()) {
+            header('Location: edit_complete.php');
+            exit;
+        } else {
+            throw new Exception($stmt->error);
+        }
+    } catch (Exception $e) {
+        $errors[] = "エラー: " . $e->getMessage();
     }
 }
 
@@ -81,10 +85,10 @@ if (empty($errors)) {
                 <input type="date" name="end_date" id="end_date" value="<?php echo htmlspecialchars($todo['end_date'], ENT_QUOTES, 'UTF-8'); ?>" required>
 
                 <label for="task">タスク名</label>
-                <input type="text" name="task" id="task" value="<?php echo htmlspecialchars($todo['task'], ENT_QUOTES, 'UTF-8'); ?>" required>
+                <input type="text" name="task" id="task" value="<?php echo htmlspecialchars($todo['task'], ENT_QUOTES, 'UTF-8'); ?>" maxlength="30" required>
 
                 <label for="task_detail">タスク詳細</label>
-                <input type="text" name="task_detail" id="task_detail" value="<?php echo htmlspecialchars($todo['task_detail'], ENT_QUOTES, 'UTF-8'); ?>" required>
+                <input type="text" name="task_detail" id="task_detail" value="<?php echo htmlspecialchars($todo['task_detail'], ENT_QUOTES, 'UTF-8'); ?>" maxlength="100" required>
 
                 <label for="status">ステータス</label>
                 <select name="status" id="status" required>
@@ -93,8 +97,11 @@ if (empty($errors)) {
                     <option value="完了" <?php echo ($todo['status'] === "完了") ? 'selected' : ''; ?>>完了</option>
                 </select>
 
-                <button type="submit" onclick="return confirm('更新してよろしいですか？');">更新する</button>
+                <button type="submit" onclick="return confirm('編集してよろしいですか？');">編集する</button>
             </form>
         </div>
     </main>
+    <footer>
+        <p class="copyright">&copy; 2025 タスク管理アプリ</p>
+    </footer>
 </body>

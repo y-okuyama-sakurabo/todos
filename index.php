@@ -1,10 +1,10 @@
 <?php
 require('dbconnect.php');
 
-$status = $_GET['status'] ?? '';
-$start_date = $_GET['start_date'] ?? '';
-$end_date = $_GET['end_date'] ?? '';
-$task = $_GET['task'] ?? '';
+$status = $_POST['status'] ?? '';
+$start_date = $_POST['start_date'] ?? '';
+$end_date = $_POST['end_date'] ?? '';
+$task = $_POST['task'] ?? '';
 $params = [];
 $types = "";
 
@@ -72,7 +72,7 @@ $todos = $result->fetch_all(MYSQLI_ASSOC);
                         <a href="register.php" class="btn">タスク登録</a>
                     </div>
                     <div class="search_area">
-                        <form method="GET" action="index.php">
+                        <form method="POST" action="index.php">
                             <label for="status">ステータス:</label>
                             <select id="status" name="status">
                                 <option value="">全て</option>
@@ -125,17 +125,24 @@ $todos = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?php echo htmlspecialchars(date("Y年m月d日", strtotime($todo['end_date'])), ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><?php echo htmlspecialchars($todo['task'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><?php echo htmlspecialchars($todo['task_detail'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($todo['status'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><a href="edit.php?id=<?php echo urlencode($todo['id']) ?>">✎</a></td>
-                        <td><a href="delete.php?id=<?php echo urlencode($todo['id']) ?>" onclick="return confirm('本当に削除しますか？');">✕</a></td>
+                        <td>
+                            <select class="status-select" data-id="<?php echo $todo['id']; ?>">
+                                <option value="未着手" <?php echo ($todo['status'] === "未着手") ? 'selected' : ''; ?>>未着手</option>
+                                <option value="進行中" <?php echo ($todo['status'] === "進行中") ? 'selected' : ''; ?>>進行中</option>
+                                <option value="完了" <?php echo ($todo['status'] === "完了") ? 'selected' : ''; ?>>完了</option>
+                            </select>
+                        </td>
+                        <td class="edit"><a href="edit.php?id=<?php echo urlencode($todo['id']) ?>">✎</a></td>
+                        <td class="delete"><a href="delete.php?id=<?php echo urlencode($todo['id']) ?>" onclick="return confirm('本当に削除しますか？');">×</a></td>
                     </tr>
                 <?php endforeach; ?>
             </table>
         </div>
     </main>
     <footer>
-        <p class="copyright">&copy; タスク管理アプリ All rights reserved.</p>
+        <p class="copyright">&copy; 2025 タスク管理アプリ</p>
     </footer>
     <script src="js/sort.js"></script>
+    <script src="js/status_update.js"></script>
 </body>
 </html>
