@@ -4,37 +4,55 @@ require('dbconnect.php');
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $start_date = filter_input(INPUT_POST, 'start_date', FILTER_SANITIZE_SPECIAL_CHARS);
-    $end_date = filter_input(INPUT_POST,'end_date', FILTER_SANITIZE_SPECIAL_CHARS);
-    $task = filter_input(INPUT_POST, 'task', FILTER_SANITIZE_SPECIAL_CHARS);
-    $task_detail = filter_input(INPUT_POST, 'task_detail', FILTER_SANITIZE_SPECIAL_CHARS);
-    $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
-}
+    $start_date = filter_input(INPUT_POST, 'start_date', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
+    $end_date = filter_input(INPUT_POST, 'end_date', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
+    $task = filter_input(INPUT_POST, 'task', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
+    $task_detail = filter_input(INPUT_POST, 'task_detail', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
+    $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
 
-if(empty($start_date) || empty($end_date) || empty($task) || empty($task_detail) || empty($status)) {
-    $errors[]= "すべての項目を入力してください";
-}
+    if (empty($start_date) || empty($end_date) || empty($task) || empty($task_detail) || empty($status)) {
+        $errors[] = "すべての項目を入力してください";
+    }
 
-if (empty($errors)){
-$sql_insert = "INSERT INTO todos (start_date, end_date, task, task_detail, status)VALUES (?, ?, ?, ?, ?);";
-$stmt = $db->prepare($sql_insert);
-if (!$stmt) {
-    die($db->error);
-}
+    if (strlen($task) > 30) {
+        $errors[] = "タスク名は30字以内で入力してください";
+    }
 
-    $stmt->bind_param("sssss", $start_date, $end_date, $task, $task_detail, $status);
-    try {
-        if ($stmt->execute()) {
-            header('Location: register_complete.php');
-            exit;
-        } else {
-            throw new Exception($stmt->error);
+    if (strlen($task_detail) > 100) {
+        $errors[] = "タスク詳細は100字以内で入力してください";
+    }
+
+    if (empty($errors)) {
+        $sql_insert = "INSERT INTO todos (start_date, end_date, task, task_detail, status) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $db->prepare($sql_insert);
+
+        if (!$stmt) {
+            die($db->error);
         }
-    } catch (Exception $e) {
-        $errors[] = "エラー: " . $e->getMessage();
+
+        $stmt->bind_param("sssss", $start_date, $end_date, $task, $task_detail, $status);
+
+        try {
+            if ($stmt->execute()) {
+                header('Location: register_complete.php');
+                exit;
+            } else {
+                throw new Exception($stmt->error);
+            }
+        } catch (Exception $e) {
+            $errors[] = "エラー: " . $e->getMessage();
+        }
     }
 }
 ?>
+
+<?php if (!empty($errors)): ?>
+    <div style="color: red;">
+        <?php foreach ($errors as $error): ?>
+            <p><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="ja">
